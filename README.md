@@ -1,7 +1,7 @@
 
 > git clone https://github.com/jameslin3263/Amigo-search-bar-issue.git
 
-> cd 
+> cd Amigo-search-bar-issue
 
 > npm install
 
