@@ -7,27 +7,38 @@ import '../index.css';
 import 'bootstrap';
 
 class ReportsName extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
       showURL:[]
     }
   }
+
   fetchURL(repolist) {
      this.props.renderMatededReportURL(repolist)
-     this.setState({showURL:this.props.activeReportURL})
+     this.setState({
+       showURL: this.props.activeReportURL
+    })
+  }
+
+  noneDisplayURL() {
+    this.setState({showURL:[]})
   }
 
   renderReportsList() {
-    return _.map(this.props.activeReportsName, (repolist,key) => {
+    const filterDuplicateReports = this.props.activeReportsName.filter((ele,index,array) => {
+      return index == array.indexOf(ele);
+    })
+    return _.map(filterDuplicateReports, (repolist,key) => {
       if (key<5) {
         return (
           <li
             key={key}
-            onClick={() => this.fetchURL(repolist)}>
+            onMouseOver={() => this.fetchURL(repolist)}
+            onMouseOut={() => this.noneDisplayURL()}>
             {repolist}
-            {this.state.showURL[key]}
+            <a href={this.props.activeReportURL}>{this.state.showURL[key]}</a>
           </li>
         );
       }}
@@ -37,7 +48,7 @@ class ReportsName extends Component {
   render() {
     return (
       <ul>
-          {this.renderReportsList()}
+        {this.renderReportsList()}
       </ul>
     );
   }

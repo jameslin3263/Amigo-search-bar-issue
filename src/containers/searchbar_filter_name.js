@@ -48,12 +48,13 @@ class SearchBarFilterName extends Component {
 
   onInputChange(event) {
     event.preventDefault();
-    this.props.renderGitHubData(
+    this.props.renderGitHubData()
       this.setState({
-        searchBarValue:event.target.value,
-        matchingValue: !_.isEmpty(this.props.activeProfileCard) ? this.props.activeProfileCard[0].filter(name => name.indexOf(event.target.value)!==-1):[]
+        searchBarValue: event.target.value,
+        matchingValue: !_.isEmpty(this.props.activeProfileCard) ?
+                        this.props.activeProfileCard[0].filter(name => name.indexOf(event.target.value)!==-1):[]
         //matchingValue: !_.isEmpty(this.props.activeProfileCard) && this.props.activeProfileCard[0].filter(x => x.indexOf(event.target.value)!==-1):[]
-    }));
+    })
 
     if(!event.target.value) {
       return this.setState({matchingValue:[]})
@@ -64,12 +65,12 @@ class SearchBarFilterName extends Component {
     event.preventDefault()
     const SearchValue = this.state.searchBarValue
 
-    if (SearchValue === ' ' || SearchValue ==='') {
+    if (SearchValue === ' ' || SearchValue === '') {
        alert(`The SearchBar should not be Empty`)
      }
      else if ( SearchValue == this.props.activeProfileCard[0].filter(name => name === SearchValue)) {
         this.props.renderMatchedBarValueFromGithub(SearchValue)
-        this.setState({searchBarValue:'',matchingValue:''})
+        this.setState({searchBarValue:'', matchingValue:[]})
       }
       else {
         alert(`Woops !! Sorry, no one called ${SearchValue} !`)
@@ -96,7 +97,7 @@ class SearchBarFilterName extends Component {
 }
 
 function mapStateToProps(state) {
-  return {activeProfileCard:state.activeProfileCard}
+  return { activeProfileCard: state.activeProfileCard }
 }
 
 function mapDispatchToProps(dispatch) {

@@ -10,7 +10,7 @@ export function renderGitHubData() {
 
   return {
     type: FETCH_PROFILE,
-    payload:request
+    payload: request
   }
 }
 
